@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link href='https://fonts.googleapis.com/css?family=Merriweather|Heebo:100,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="song.css">
+</head>
+<body>
+	<div id="song-container" class="container">
+	</div>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/github.js"></script>
+	<script type="text/javascript" src="js/chordprojs.js"></script>
+	<script type="text/javascript">
+		var url = "https://raw.githubusercontent.com/tvdavies/chords/master/Lead%20Me%20To%20The%20Rock.chordpro";
+		//var url = "https://raw.githubusercontent.com/tvdavies/chords/master/We%20Lift%20Your%20Name%20Up.chordpro";
+        //var url = "https://raw.githubusercontent.com/tvdavies/chords/master/Worthy%20You%20Are.chordpro";
+
+		$.get(url, function (data) {
+            var $song = $(chordprojs.parse(data).render());
+            $('#song-container').append($song);
+
+            $song.find('td > span.song-text-segment').each(function (i) {
+            	var textWidth = $(this).width();
+            	var chordWidth = $(this).parent().width();
+            	var nextSpan = $song.find('td > span.song-text-segment')[i + 1];
+
+                // Check next text is on the same row
+                if (nextSpan && $(nextSpan).parent().parent()[0] === $(this).parent().parent()[0]) {
+                    // The next text is on the same row
+                    var thisText = $(this).html();
+                    var nextText = $(nextSpan).html();
+                    var stretched = thisText.trim().length > 0 && textWidth < chordWidth;
+                    var splitWord = thisText.indexOf('&nbsp;') <= 0 && nextText.indexOf('&nbsp;') !== 0;
+
+                    // If this column has been stretched by the chord,
+                    // and the text does not end with a space
+                    // and next text does not start with a space
+                    // then insert a hyphen.
+                    if (stretched && splitWord) {
+                        $(this).append('&nbsp;-&nbsp;');
+                    }
+                }
+            });
+		});
+	</script>
+</body>
+</html>
+
