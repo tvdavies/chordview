@@ -13,7 +13,6 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/github.js"></script>
 	<script type="text/javascript" src="js/chordprojs.js"></script>
 	<script type="text/javascript">
 		var url = "https://raw.githubusercontent.com/tvdavies/chords/master/Lead%20Me%20To%20The%20Rock.chordpro";
@@ -21,7 +20,7 @@
         //var url = "https://raw.githubusercontent.com/tvdavies/chords/master/Worthy%20You%20Are.chordpro";
 
 		$.get(url, function (data) {
-            var $song = $(chordprojs.parse(data).render());
+            var $song = $(chordprojs.parse(data).render('A'));
             $('#song-container').append($song);
 
             $song.find('td > span.song-text-segment').each(function (i) {
