@@ -13,14 +13,12 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/chordprojs.js"></script>
+	<script src="https://rawgit.com/tvdavies/chordprojs/master/dist/chordpro.min.js"></script>
 	<script type="text/javascript">
-		var url = "https://raw.githubusercontent.com/tvdavies/chords/master/Lead%20Me%20To%20The%20Rock.chordpro";
-		//var url = "https://raw.githubusercontent.com/tvdavies/chords/master/We%20Lift%20Your%20Name%20Up.chordpro";
-        //var url = "https://raw.githubusercontent.com/tvdavies/chords/master/Worthy%20You%20Are.chordpro";
+		var url = "https://raw.githubusercontent.com/tvdavies/chords/master/The%20Lion%20And%20The%20Lamb.chordpro";
 
 		$.get(url, function (data) {
-            var $song = $(chordprojs.parse(data).render('A'));
+            var $song = $(chordpro.parse(data).render('A'));
             $('#song-container').append($song);
 
             $song.find('td > span.song-text-segment').each(function (i) {
